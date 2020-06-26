@@ -25,5 +25,12 @@ public class TranslatorImplTest {
         Assert.assertEquals(response, "Hola Mundo");
     }
 
+    @Test(invocationCount = 100, threadPoolSize = 5)
+    public void testSuma() throws Exception {
+        Addition objectSum = new Addition(3.0f,4.0f);
+        Float response = objectSum.getResult();
+        Float expected = 7.0f;
+        Assert.assertEquals(response, expected);
+    }
 
 }
