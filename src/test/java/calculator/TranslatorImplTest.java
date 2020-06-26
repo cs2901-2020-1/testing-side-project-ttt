@@ -33,4 +33,45 @@ public class TranslatorImplTest {
         Assert.assertEquals(response, expected);
     }
 
+    @Test(invocationCount = 100, threadPoolSize = 5)
+    public void testResta() throws Exception {
+        Substraction objectSub = new Substraction(10.0f, 7.0f);
+        Float response = objectSub.getResult();
+        Float expected = 3.0f;
+        Assert.assertEquals(response, expected);
+    }
+
+    @Test(invocationCount = 100, threadPoolSize = 5)
+    public void testMultiplicacion() throws Exception {
+        Multiplication objectSub = new Multiplication(5.0f, 6.0f);
+        Float response = objectSub.getResult();
+        Float expected = 30.0f;
+        Assert.assertEquals(response, expected);
+    }
+
+    @Test(invocationCount = 100, threadPoolSize = 5)
+    public void testDivision() throws Exception {
+        Divide objectSub = new Divide(42.0f, 14.0f);
+        Float response = objectSub.getResult();
+        Float expected = 3.0f;
+        Assert.assertEquals(response, expected);
+    }
+
+    @Test(invocationCount = 100, threadPoolSize = 5)
+    public void testExpresion() throws Exception {
+        CalculatorFacade objectExpresion = new CalculatorFacade();
+        double response = objectExpresion.getResult("40-31+4*3-15/5");
+        double expected = 18.0f;
+        Assert.assertEquals(response, expected);
+    }
+
+    @Test(invocationCount = 100, threadPoolSize = 5)
+    public void testExecute() throws Exception {
+        testSuma();
+        testResta();
+        testMultiplicacion();
+        testDivision();
+        testExpresion();
+    }
+
 }

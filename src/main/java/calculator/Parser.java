@@ -4,8 +4,8 @@ import java.util.Vector;
 import java.util.Stack;
 
 public class Parser {
-    private Vector<String> postfixExp = new Vector<>();
-    private String expression;
+    private final Vector<String> postfixExp = new Vector<>();
+    private final String expression;
 
     private boolean isOperand(Character c){
         return c >= '0' && c <= '9';
@@ -40,7 +40,7 @@ public class Parser {
     }
 
     private void infixToPostfix() {
-        Stack<Character> stackOperators = new Stack<Character>();
+        Stack<Character> stackOperators = new Stack<>();
         StringBuilder operandSb = new StringBuilder();
         for(char c: expression.toCharArray()){
             if(isOperand(c)) {
@@ -49,13 +49,13 @@ public class Parser {
             else if(isOperator(c)) {
                 if(operandSb.length() > 0) {
                     postfixExp.add(operandSb.toString());
-                    operandSb = new StringBuilder();    // clear operandSb
+                    operandSb = new StringBuilder();    // Clear operandSb
                 }
                 // Mientras hayan operadores en el stack de mayor o igual precedencia que el actual sacarlos del stack
                 while(!stackOperators.empty() && hasHigherPrecedence(stackOperators.peek(), c)) {
                     postfixExp.add(stackOperators.pop().toString());
                 }
-                // si es de mayor precedencia ponerlo en el stack
+                // Si es de mayor precedencia ponerlo en el stack
                 stackOperators.add(c);
             }
         }
